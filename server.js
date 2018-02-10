@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
+var request = require("request");
 var cheerio = require("cheerio");
 
 // Require all models
@@ -13,7 +13,6 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 
-// Configure middleware
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));

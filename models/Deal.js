@@ -11,16 +11,15 @@ var DealSchema = new Schema({
     type: String,
     required: true
   },
-  price: {
-    type: String,
-    required: true
-  },
-  code: {
-    type: String
-  },
-  vendor: {
-    type: String
-  },
+  // price: {
+  //   type: String,
+  // },
+  // code: {
+  //   type: String
+  // },
+  // vendor: {
+  //   type: String
+  // },
   picture: {
     type: String,
     required: true

@@ -8,9 +8,18 @@ module.exports = function(app) {
   app.get("/", function(req, res) {
     res.render("index");
   });
-  app.get("/articles", function(req, res) {
-    // TODO: Finish the route so it grabs all of the articles
-  });
+
+  app.get("/deals", function(req, res) {
+    db.Deal.find({}).limit(100)
+        .then(function(deals){
+            res.render('deals', {
+                deals: deals
+            });
+        })
+        .catch(function(err){ 
+            res.json(err);
+        });
+    });
   
   // Route for grabbing a specific Article by id, populate it with it's note
   app.get("/articles/:id", function(req, res) {

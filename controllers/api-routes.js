@@ -8,37 +8,38 @@ module.exports = function(app) {
 
     app.get("/scrape", function(req, res) {
         request("https://deals.kinja.com/all-the-best-deals-1822529788", function(error, response, html) {
-
-            var $ = cheerio.load(html);
         
-            $(".commerce-inset").each(function(i, element) {
-              
-              var title = $(element).find('header h2 a').text();
-              var deal = $(element).find('a').first().attr("href");
-              var price = $(element).find('a').first().text();
-              var code = $(element).find('span.commerce-inset__promocode').text();
-              var vendor = $(element).find('span.commerce-inset__provider-name').text();
-              var picture = $(element).find('.commerce-inset__element--image a img').attr('src');
+            var $ = cheerio.load(html);
+            $(".js_marquee-assetfigure").each(function(i, element) {
+              var title = $(element).find('figcaption').text();
+              var deal = $(element).find('figcaption a').attr("href");
+            //   var price = $(element).find('a').first().text();
+            //   var code = $(element).find('span.commerce-inset__promocode').text();
+            //   var vendor = $(element).find('span.commerce-inset__provider-name').text();
+              var picture = $(element).find('picture source').attr('data-srcset');
           
               // Save these results in an object that we'll push into the results array we defined earlier
               var result = {
                 title: title,
                 deal: deal,
-                price: price,
-                code: code,
-                vendor: vendor,
+                // price: price,
+                // code: code,
+                // vendor: vendor,
                 picture: picture
               };
+
+              console.log(result);
 
               db.Deal
               .create(result)
               .then(function(dbDeal) {
-                  // If we were able to successfully scrape and save an Article, send a message to the client
+
               })
               .catch(function(err) {
                   // If an error occurred, send it to the client
-                  res.json(err);
+                  console.log(err);
               });
+
             });
   });
   res.send("Scrape Complete");

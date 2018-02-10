@@ -1,12 +1,10 @@
-{{#each listings}}
-<div class="deal-item">
-    <img class="d-block w-100 housePicture" src="{{this.picturePath}}" data-listing-id="{{this.id}}" alt="House Listing">
-        <div class="col-lg-12 moreInformation">
-            <button type="button" class="btn btn-info matchbtn" data-toggle="collapse" data-target="#{{this.id}}">More Information</button>
-        </div>
-        <div id="{{this.id}}" class="collapse out">
-	        <p>Bedrooms: {{this.bedrooms}}</p>
-	        <p>Bathrooms: {{this.bathrooms}}</p>
-		</div>
+{{#each deals}}
+<div class="deal-item col-md-3">
+    <img class="deal-img" src="{{this.picture}}" alt="{{this.title}}">
+    <h5>{{this.title}} <span class="badge badge-success">{{this.price}}</span></h5>
+    <p>Via: {{this.vendor}}</p>
+    <p class="promo-code">{{this.code}}</p>
+    <a role="button" class="btn btn-info" href="{{this.deal}}">Try Me!</a>
+    <a role="button" class="btn btn-warning" data-deal="{{this.title}}" href="{{this.deal}}">Comment</a>
 </div>
 {{/each}}
